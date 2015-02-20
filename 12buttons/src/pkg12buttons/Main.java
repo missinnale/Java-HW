@@ -35,7 +35,7 @@ public class Main {
         Random rand = new Random();
         for (int i = 0; i < numberOfButtons; ++i){
             buttonArray[i] = new JButton("Click me");
-            buttonArray[i].addActionListener(new ButtonPress(i));
+            buttonArray[i].addActionListener(new ButtonPress());
             buttonArray[i].setBackground(new Color(rand.nextInt(256), rand.nextInt(256), rand.nextInt(256)));
             buttonArray[i].setOpaque(true);
             buttonArray[i].setBorderPainted(false);
@@ -45,20 +45,13 @@ public class Main {
     
 }
 
-class ButtonPress implements ActionListener {
-    
-    int iteration = 0;
-    
-    ButtonPress(int i){
-        iteration = i;
-    }
-    
+class ButtonPress implements ActionListener {    
     @Override
     public void actionPerformed(ActionEvent ae) {
         JButton[] buttonArray = Main.buttonArray;
         Random rand = new Random();
         for(int i = 0; i < Main.numberOfButtons; ++i){
-            if(i == iteration){continue;}
+            if(buttonArray[i] == ae.getSource()){continue;}
             buttonArray[i].setBackground(new Color(rand.nextInt(256), rand.nextInt(256), rand.nextInt(256)));
         }
     }
